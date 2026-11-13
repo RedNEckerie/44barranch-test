@@ -5,12 +5,11 @@ import HeaderLink from './HeaderLink.astro';
 <header>
 	<a class="skip" href="#content">Skip to content</a>
 	<nav class="nav" aria-label="Main">
-		<a class="brand" href="/">
+		<a class="brand" href="/" aria-label="44 Bar Ranch home">
 			<span class="brand-mark" aria-hidden="true">
 				<span class="brand-num">44</span>
 				<span class="brand-bar"></span>
 			</span>
-			<span class="brand-name">44 Bar Ranch</span>
 		</a>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
@@ -52,7 +51,6 @@ import HeaderLink from './HeaderLink.astro';
 	.brand {
 		display: flex;
 		align-items: center;
-		gap: 0.7rem;
 		padding: 0.55rem 0;
 		color: #f6f1e7;
 		text-decoration: none;
@@ -82,13 +80,6 @@ import HeaderLink from './HeaderLink.astro';
 		background: #e2b15c;
 		border-radius: 1px;
 	}
-	.brand-name {
-		font-family: Georgia, Palatino, "Palatino Linotype", serif;
-		font-size: 1.28rem;
-		font-weight: 700;
-		letter-spacing: -0.015em;
-		line-height: 1;
-	}
 	.internal-links {
 		display: flex;
 		flex-wrap: wrap;
@@ -113,9 +104,6 @@ import HeaderLink from './HeaderLink.astro';
 		}
 		.internal-links :global(a) {
 			padding: 0.65rem 0.85rem 0.65rem 0;
-		}
-		.brand-name {
-			font-size: 1.12rem;
 		}
 	}
 </style>
