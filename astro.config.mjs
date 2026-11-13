@@ -8,6 +8,9 @@ import cloudflare from "@astrojs/cloudflare";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://44barranch-test.jay-t-clark.workers.dev",
+	redirects: {
+		"/dove-camp-2026": { destination: "/about/dove-camp-2026/", status: 301 },
+	},
 	integrations: [mdx(), sitemap()],
 	adapter: cloudflare({
 		platformProxy: {
