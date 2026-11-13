@@ -1,8 +1,8 @@
 {
 	"name": "44barranch-test",
-	"description": "Build a personal website, blog, or portfolio with Astro.",
+	"description": "44 Bar Ranch, a small family ranch in rural Texas.",
 	"cloudflare": {
-		"label": "Astro Framework Starter",
+		"label": "44 Bar Ranch",
 		"products": [
 			"Workers"
 		],

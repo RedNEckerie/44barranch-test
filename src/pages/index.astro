@@ -1,50 +1,86 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// Home page copy lives in this file.
+// The big banner is src/assets/photos/44bar-hero.jpg.
+// Animal photos: see src/assets/photos/README.md.
+import { Picture } from 'astro:assets';
+import Page from '../layouts/Page.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import hero from '../assets/photos/44bar-hero.jpg';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Page title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<section class="hero" slot="hero">
+		<h1 class="sr-only">44 Bar Ranch</h1>
+		<Picture
+			src={hero}
+			formats={['avif', 'webp']}
+			alt="Hereford bull beside the 44 Bar Ranch brand"
+			layout="full-width"
+			widths={[480, 768, 1024, 1280]}
+			sizes="100vw"
+			loading="eager"
+			fetchpriority="high"
+			pictureAttributes={{ class: 'hero-picture' }}
+		/>
+	</section>
+
+	<p class="tagline">
+		Eggs most mornings, cattle on the grass, and a dog who thinks he runs the place.
+	</p>
+
+	<section class="intro">
+		<h2>The short version</h2>
+		<p class="lede">
+			44 Bar Ranch is a small family place in rural Texas. The days start with the chickens,
+			because the chickens start whether anybody is ready or not. Turkeys live here too. So do
+			cattle, and a few ranch dogs who take the job more seriously than the job asked them to.
+		</p>
+	</section>
+
+	<section class="animals">
+		<h2>Who lives here</h2>
+		<div class="animal-grid">
+			<article class="animal-card">
+				<PhotoSlot name="chickens" alt="Chickens at 44 Bar Ranch" />
+				<h3>Chickens</h3>
+				<p>
+					The hens keep the only schedule on the place that actually holds. Eggs most days. If
+					the basket is full, the morning went all right.
+				</p>
+			</article>
+			<article class="animal-card">
+				<PhotoSlot name="turkeys" alt="Turkeys at 44 Bar Ranch" />
+				<h3>Turkeys</h3>
+				<p>
+					Turkeys have opinions, and they share all of them. They are part of the yard anyway,
+					noise included.
+				</p>
+			</article>
+			<article class="animal-card">
+				<PhotoSlot name="cattle" alt="Cattle at 44 Bar Ranch" />
+				<h3>Cattle</h3>
+				<p>
+					The cattle handle the pasture. They are not in a hurry, and around here that counts as
+					a skill.
+				</p>
+			</article>
+			<article class="animal-card">
+				<PhotoSlot name="dogs" alt="Ranch dogs at 44 Bar Ranch" />
+				<h3>Ranch dogs</h3>
+				<p>
+					The dogs have appointed themselves management. Gates, strangers, and anything with
+					feathers fall under their watch. Pay is a porch and supper.
+				</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="blog-cta">
+		<div>
+			<h2>Notes from the place</h2>
+			<p>When something out here is worth telling, it goes on the blog. No newsletter. No fuss.</p>
+		</div>
+		<a class="button" href="/blog">Read the blog</a>
+	</section>
+</Page>
