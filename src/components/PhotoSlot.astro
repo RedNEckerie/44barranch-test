@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import PlaceholderArt from './PlaceholderArt.astro';
+
+interface Props {
+	name: string;
+	alt: string;
+}
+
+const { name, alt } = Astro.props;
+
+const photos = import.meta.glob<ImageMetadata>(
+	'../assets/photos/{chickens,turkeys,cattle,dogs,about}.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP}',
+	{ eager: true, import: 'default' },
+);
+
+const match = Object.entries(photos).find(([path]) => {
+	const file = path.split('/').pop() ?? '';
+	const base = file.replace(/\.[^.]+$/, '').toLowerCase();
+	return base === name.toLowerCase();
+});
+
+const photo = match?.[1];
+const widths = photo
+	? [...new Set([480, 800, 1200, photo.width].filter((width) => width <= photo.width))].sort(
+			(a, b) => a - b,
+		)
+	: [];
+---
+
+<figure class:list={['photo-slot', { 'is-empty': !photo }]}>
+	{
+		photo ? (
+			<Image
+				src={photo}
+				alt={alt}
+				widths={widths}
+				sizes="(max-width: 720px) 100vw, 540px"
+			/>
+		) : (
+			<>
+				<PlaceholderArt kind={name} />
+				<figcaption class="photo-hint">
+					Photo placeholder. Add <code>{name}.jpg</code> to <code>src/assets/photos</code>.
+				</figcaption>
+			</>
+		)
+	}
+</figure>
